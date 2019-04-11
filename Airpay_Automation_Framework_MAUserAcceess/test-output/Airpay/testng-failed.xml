@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Airpay]">
+  <parameter name="appURL" value="http://localhost/airpay_php/transaction.html"/>
+  <parameter name="tcID" value="TC_001_SOTC_Logo_Verify"/>
+  <parameter name="browserType" value="CHROME"/>
+  <test name="TC_001_SOTC_Logo_Verify">
+    <parameter name="appURL" value="http://localhost/airpay_php/transaction.html"/>
+    <parameter name="tcID" value="TC_001_SOTC_Logo_Verify"/>
+    <parameter name="browserType" value="CHROME"/>
+    <classes>
+      <class name="com.Airpay.Tests.TC_001_SOTC_Logo_Verify"/>
+    </classes>
+  </test> <!-- TC_001_SOTC_Logo_Verify -->
+</suite> <!-- Failed suite [Airpay] -->

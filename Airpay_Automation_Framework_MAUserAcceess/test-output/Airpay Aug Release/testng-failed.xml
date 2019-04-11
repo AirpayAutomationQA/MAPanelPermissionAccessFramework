@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Airpay Aug Release]">
+  <parameter name="appURL" value="http://localhost/airpay_php/transaction.html"/>
+  <parameter name="tcID" value="TC_LocalHost_Details_Page_test1"/>
+  <parameter name="browserType" value="CHROME"/>
+  <test name="TC_LocalHost_Details_Page_test1">
+    <parameter name="appURL" value="http://localhost/airpay_php/transaction.html"/>
+    <parameter name="tcID" value="TC_LocalHost_Details_Page_test1"/>
+    <parameter name="browserType" value="CHROME"/>
+    <classes>
+      <class name="com.Airpay.Tests.TC_LocalHost_Details_Page_test"/>
+    </classes>
+  </test> <!-- TC_LocalHost_Details_Page_test1 -->
+</suite> <!-- Failed suite [Airpay Aug Release] -->
