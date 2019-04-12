@@ -17,6 +17,7 @@ public class AirPay_Payment_MA_Panel_PageObject {
 	public static final String ReportSubMenu ="(//div[@class='mm-panel mm-hasnavbar mm-highest mm-current mm-opened']//ul//li)";
 	public static final String TransactionAnalysis ="(//span[@class='glyphicon glyphicon-signal pri-menu'])[1]//preceding::a[@class='mm-next'][1]";
 	public static final String MasterMenuNext ="(//span[@class='glyphicon glyphicon-cog pri-menu'])[1]//preceding::a[@class='mm-next'][1]";
+	public static final String BulkProcessingMenuNext ="(//span[@class='glyphicon  glyphicon-cloud-upload pri-menu'])[1]//preceding::a[@class='mm-next'][1]";
 
 	
 	
