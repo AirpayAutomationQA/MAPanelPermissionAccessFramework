@@ -13,7 +13,7 @@ import com.Airpay.TestData.Excel_Handling;
 import com.Airpay.Utilities.Create_TestNGXML;
 import com.Airpay.Utilities.Log;
 
-public class TC_ID_007_Bulk_Processing_TestCase extends Driver_Setup{
+public class TC_ID_009_EMI extends Driver_Setup{
 	public static WebDriver webDriver = null;
 	public static String tcID = null;
 	public boolean flag = false;
@@ -43,25 +43,32 @@ public class TC_ID_007_Bulk_Processing_TestCase extends Driver_Setup{
 					}else{
 						Extent_Reporting.Log_Fail("Home menu does not exist", "fail", driver);
 					}
-					if(MA_panel.Home_LHS_Dashboard(AirPay_Payment_MA_Panel_PageObject.BulkProcessingMenuNext)==true)
-					{
-						Extent_Reporting.Log_Pass("Home Menu Is exist", "Passed");
-						Extent_Reporting.Log_report_img("Home Menu", "Passed", driver);
-					}else{
-						Extent_Reporting.Log_Fail("Home menu does not exist", "fail", driver);
-						test.NavigationWithTodaysDate("Fail");
-					}
 					String FieldName = Excel_Handling.Get_Data(ModuleName, "Fields").trim();
 					if(Excel_Handling.Get_Data(ModuleName, "PermissionAccess").trim().equalsIgnoreCase("N"))
 					 {
-						if(driver.findElements(By.xpath("//*[text()='"+FieldName+"']")).size()==0)
+						if(driver.findElements(By.xpath("//*[text()='EMI']")).size()==0)
 						{				
 							Extent_Reporting.Log_Pass("Respective Menu not exist", "Passed");
 							Extent_Reporting.Log_report_img("Home Menu", "Passed", driver);
 							test.NavigationWithTodaysDate("Pass");
 						}
-					 }else{
-							MA_panel.chkstatusReport();					
+					 }else{						 
+						 if(MA_panel.Home_LHS_Dashboard(AirPay_Payment_MA_Panel_PageObject.KotakMenuNext)==true)
+							{
+								Extent_Reporting.Log_Pass("Home Menu Is exist", "Passed");
+								Extent_Reporting.Log_report_img("Home Menu", "Passed", driver);
+							}else{
+								Extent_Reporting.Log_Fail("Home menu does not exist", "fail", driver);
+							}
+						 if(MA_panel.Home_LHS_Dashboard(AirPay_Payment_MA_Panel_PageObject.KotakEMI)==true)
+							{
+								Extent_Reporting.Log_Pass("Home Menu Is exist", "Passed");
+								Extent_Reporting.Log_report_img("Home Menu", "Passed", driver);
+								MA_panel.chkstatusReport();					
+
+							}else{
+								Extent_Reporting.Log_Fail("Home menu does not exist", "fail", driver);
+							}
 					 }
 			}
 			if(Excel_Handling.Get_Data(ModuleName, "ProceedWithURL").trim().equalsIgnoreCase("Y"))

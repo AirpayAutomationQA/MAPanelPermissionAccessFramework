@@ -13,7 +13,7 @@ import com.Airpay.TestData.Excel_Handling;
 import com.Airpay.Utilities.Create_TestNGXML;
 import com.Airpay.Utilities.Log;
 
-public class TC_ID_007_Bulk_Processing_TestCase extends Driver_Setup{
+public class TC_ID_008_User_Management extends Driver_Setup{
 	public static WebDriver webDriver = null;
 	public static String tcID = null;
 	public boolean flag = false;
@@ -42,14 +42,6 @@ public class TC_ID_007_Bulk_Processing_TestCase extends Driver_Setup{
 						Extent_Reporting.Log_report_img("Home Menu", "Passed", driver);
 					}else{
 						Extent_Reporting.Log_Fail("Home menu does not exist", "fail", driver);
-					}
-					if(MA_panel.Home_LHS_Dashboard(AirPay_Payment_MA_Panel_PageObject.BulkProcessingMenuNext)==true)
-					{
-						Extent_Reporting.Log_Pass("Home Menu Is exist", "Passed");
-						Extent_Reporting.Log_report_img("Home Menu", "Passed", driver);
-					}else{
-						Extent_Reporting.Log_Fail("Home menu does not exist", "fail", driver);
-						test.NavigationWithTodaysDate("Fail");
 					}
 					String FieldName = Excel_Handling.Get_Data(ModuleName, "Fields").trim();
 					if(Excel_Handling.Get_Data(ModuleName, "PermissionAccess").trim().equalsIgnoreCase("N"))

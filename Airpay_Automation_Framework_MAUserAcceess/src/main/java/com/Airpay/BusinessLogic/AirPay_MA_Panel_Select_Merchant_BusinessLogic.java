@@ -247,6 +247,7 @@ public class AirPay_MA_Panel_Select_Merchant_BusinessLogic extends AirPay_Paymen
 	}
 	
 	public boolean chkstatusReport() throws Throwable{
+	try{
 		FieldName = Excel_Handling.Get_Data(ModuleName, "Fields").trim();
 		 if(Excel_Handling.Get_Data(ModuleName, "PermissionAccess").trim().equalsIgnoreCase("Y"))
 		 {
@@ -285,6 +286,11 @@ public class AirPay_MA_Panel_Select_Merchant_BusinessLogic extends AirPay_Paymen
 					return false;
 				}		 
 		 }
+		}catch(Exception t){
+			t.printStackTrace();
+	       	test.NavigationWithTodaysDate("fail");		
+			throw new Exception("Serch filter does not exist");
+		}
 		return true;	
 	}
 	

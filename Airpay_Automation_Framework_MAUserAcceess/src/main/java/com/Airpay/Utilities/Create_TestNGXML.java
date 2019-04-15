@@ -9,24 +9,15 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.ss.util.CellReference;
+
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.testng.TestNG;
 import org.testng.annotations.Test;
@@ -37,7 +28,6 @@ import org.testng.xml.XmlTest;
 
 import com.Airpay.Reporting.Report_Setup;
 import com.Airpay.TestData.Excel_Handling;
-import com.sun.tracing.dtrace.ModuleName;
 
 
 public class Create_TestNGXML {	
@@ -133,7 +123,7 @@ public class Create_TestNGXML {
             	test.setName (key);            	
     	        test.setPreserveOrder ("true");
     	        test.addParameter("browserType", Excel_Handling.Get_Data(key, "Browser_Type"));
-    	        test.addParameter("ModuleName", key);
+    	        test.addParameter("tcID", key);
     	        test.addParameter("appURL", new Common_Functions_old().GetXMLTagValue(Constants.configPath+"Config.xml", "AppUrl")); 	        
         		XmlClass testClass = new XmlClass ();
         		testClass.setName ("com.Airpay.Tests."+Excel_Handling.Get_Data(key, "Class_Name"));
@@ -191,11 +181,9 @@ public class Create_TestNGXML {
 			fis = new FileInputStream(new File(Constants.datasheetPath+"Datasheet.xlsx"));
 			workbook = new XSSFWorkbook(fis);
 			workbook.getName(SheetnameTest);
-			System.out.println(SheetnameTest);
-			
+			System.out.println(SheetnameTest);			
 			filwrit = new FileOutputStream(new File(Constants.datasheetPath+"Datasheet.xlsx"));		
-			Excel_Handling.setCellDataWithCondtion(URLWithTodaysDate,"ModuleName",keys, Status);
-			
+			Excel_Handling.setCellDataWithCondtion(URLWithTodaysDate,"ModuleName",keys, Status);			
 			filwrit.close();
 			fis.close();			
 			excel.close();					

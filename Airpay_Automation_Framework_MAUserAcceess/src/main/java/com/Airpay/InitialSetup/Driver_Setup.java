@@ -89,7 +89,7 @@ public class Driver_Setup {
 		return driver;
 	}
 	
-	@Parameters({ "browserType", "appURL","ModuleName" })
+	@Parameters({ "browserType", "appURL","tcID" })
 	@BeforeClass
 	public void initializeTestBaseSetup(String browserType, String appURL,String tcID) {
 		try {
