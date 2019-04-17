@@ -19,9 +19,18 @@ public class AirPay_Payment_MA_Panel_PageObject {
 	public static final String MasterMenuNext ="(//span[@class='glyphicon glyphicon-cog pri-menu'])[1]//preceding::a[@class='mm-next'][1]";
 	public static final String BulkProcessingMenuNext ="(//span[@class='glyphicon  glyphicon-cloud-upload pri-menu'])[1]//preceding::a[@class='mm-next'][1]";
 	public static final String KotakEMI ="//*[text()='Kotak EMI']//preceding::a[@class='mm-next'][1]";
+	public static final String AxisSIMenu ="//*[text()='Axis SI']//preceding::a[@class='mm-next'][1]";
 
+	public static final String MerchantManager ="(//span[@class='glyphicon glyphicon-globe pri-menu'])[1]//preceding::a[@class='mm-next'][1]";
+	public static final String PaymentModeMenu ="//*[text()='Payment mode']//preceding::a[@class='mm-next'][1]";
+	public static final String AirpaySettingsMenu ="//*[text()='Airpay Settings']//preceding::a[@class='mm-next'][1]";
+	
+	
+	
 	public static final String KotakMenuNext ="(//span[@class='glyphicon glyphicon-calendar pri-menu'])[1]//preceding::a[@class='mm-next'][1]";
+	public static final String SubscriptionMainMenu ="(//span[@class='glyphicon glyphicon-retweet pri-menu'])[1]//preceding::a[@class='mm-next'][1]";
 
+	
 	
 	
 	
