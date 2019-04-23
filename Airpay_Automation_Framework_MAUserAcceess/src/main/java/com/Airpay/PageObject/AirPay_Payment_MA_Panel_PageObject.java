@@ -25,12 +25,18 @@ public class AirPay_Payment_MA_Panel_PageObject {
 	public static final String PaymentModeMenu ="//*[text()='Payment mode']//preceding::a[@class='mm-next'][1]";
 	public static final String AirpaySettingsMenu ="//*[text()='Airpay Settings']//preceding::a[@class='mm-next'][1]";
 	
-	
+	public static final String AdvanceSerchForm ="//form[@id='advanceSearch']";
+	public static final String AdvanceSerchBtn ="//button[text()='Advanced Search']";
+	public static final String AdvanceSearchInputField ="//form[@id='advanceSearch']//following::fieldset//input";
+	public static final String AdvanceSearchSelectField ="//form[@id='advanceSearch']//following::fieldset//select";
 	
 	public static final String KotakMenuNext ="(//span[@class='glyphicon glyphicon-calendar pri-menu'])[1]//preceding::a[@class='mm-next'][1]";
 	public static final String SubscriptionMainMenu ="(//span[@class='glyphicon glyphicon-retweet pri-menu'])[1]//preceding::a[@class='mm-next'][1]";
 
 	
+	
+	public static final String MainMenu ="(//div[contains(@class,'mm-current')])[1]//ul/li";
+
 	
 	
 	

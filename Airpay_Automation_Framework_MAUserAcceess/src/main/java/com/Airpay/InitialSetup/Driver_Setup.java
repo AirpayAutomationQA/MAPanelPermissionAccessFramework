@@ -22,7 +22,7 @@ public class Driver_Setup {
 		return driver;
 
 	}
-	public void setDriver(String browserType, String appURL) throws InterruptedException{
+	public void setDriver(String browserType, String appURL) throws Exception{
 		switch(browserType){
 
 		case "IE":
@@ -36,12 +36,21 @@ public class Driver_Setup {
 		case "FIREFOX":
 			driver = initfirefoxDriver(appURL);
 			break;
+			
+		case "NA":
+			driver = NA();
+			break;	
 
 		default :
 			System.out.println("you have enetered as invalid browser");
 		}		
 	}
 
+	
+	public WebDriver NA() throws Exception{
+		System.out.println("Hello");
+		return driver;
+	}
 	public WebDriver initChromeDriver(String appURL) throws InterruptedException {
 		//driver.get("chrome://settings/clearBrowserData");
 		

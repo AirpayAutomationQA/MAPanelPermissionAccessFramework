@@ -1,6 +1,8 @@
 package com.Airpay.BusinessLogic;
 
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -78,6 +80,31 @@ public class AirPay_MA_Panel_Select_Merchant_BusinessLogic extends AirPay_Paymen
 			{
 				Extent_Reporting.Log_report_img("Menu redirected as expected", "Passed", driver);
 				System.out.println("Links got matched as expected");				
+			}else{
+				Extent_Reporting.Log_Fail("Passed URL is: "+URLConcat, "Actual URL is: "+MA_ActualUrl, driver);			
+				return false;
+			}			
+		}catch(Exception t){
+			t.printStackTrace();
+			Extent_Reporting.Log_Fail("URL Not Matched for "+ModuleName, "Failed", driver);
+			throw new Exception("MA panel page issue");
+		
+		}
+		return true;
+	}
+
+	public boolean NavigationPageVerify() throws Exception{
+		try{
+			Thread.sleep(15000);
+			MA_ActualUrl = Excel_Handling.Get_Data(ModuleName, "RootURL").trim();
+			String Link = Excel_Handling.Get_Data(ModuleName, "Link").trim();
+			URLConcat = MA_ActualUrl.concat(Link);
+			Assert.waitForPageToLoad(driver);		
+			MA_ActualUrl = driver.getCurrentUrl().trim();
+			System.out.println("Actual URL: "+URLConcat);
+			if(MA_ActualUrl.equalsIgnoreCase(URLConcat))
+			{
+				Extent_Reporting.Log_report_img("Menu redirected as expected", "Passed", driver);
 			}else{
 				Extent_Reporting.Log_Fail("Passed URL is: "+URLConcat, "Actual URL is: "+MA_ActualUrl, driver);			
 				return false;
@@ -293,6 +320,42 @@ public class AirPay_MA_Panel_Select_Merchant_BusinessLogic extends AirPay_Paymen
 		}
 		return true;	
 	}
+	
+	public boolean URLDashboard() throws Throwable{
+		try{
+			FieldName = Excel_Handling.Get_Data(ModuleName, "Fields").trim();
+			 if(Excel_Handling.Get_Data(ModuleName, "PermissionAccess").trim().equalsIgnoreCase("N"))
+			 { 
+				    MA_ActualUrl = Excel_Handling.Get_Data(ModuleName, "RootURL").trim();
+					String Link = Excel_Handling.Get_Data(ModuleName, "Link").trim();
+					URLConcat = MA_ActualUrl.concat(Link);
+					driver.navigate().to(URLConcat);
+					Assert.waitForPageToLoad(driver);
+					Thread.sleep(5000);
+					MA_ActualUrl = driver.getCurrentUrl().trim();
+					System.out.println("Actual URL: "+URLConcat);
+					if(!MA_ActualUrl.equalsIgnoreCase(URLConcat))
+					{
+						Extent_Reporting.Log_report_img("URL are different", "As expected", driver);
+						System.out.println("Links didn't matched got matched as expected");	
+				       	test.URLWithTodaysDate("Pass");		
+
+					}else{
+						Extent_Reporting.Log_Fail("Passed URL is: "+URLConcat, "Actual URL is: "+MA_ActualUrl, driver);
+				       	test.URLWithTodaysDate("fail");		
+						return false;
+					}		  
+			 }else
+			 {				 
+					test.URLWithTodaysDate("I think, You have given the Wrong permission Access");
+			 }
+			}catch(Exception t){
+				t.printStackTrace();
+		       	test.NavigationWithTodaysDate("fail");		
+				throw new Exception("Serch filter does not exist");
+			}
+			return true;	
+		}
 	
 	public boolean chkstatusReportForURL() throws Throwable{
 		
@@ -1569,6 +1632,225 @@ public class AirPay_MA_Panel_Select_Merchant_BusinessLogic extends AirPay_Paymen
 
 		}
 	}
+	
+	public static List<WebElement> OpenCurrentMenuCount =null;
+	public void Dashboard(String DatasheetFieldName) throws Exception {
+		try{	
+			Create_TestNGXML test = new Create_TestNGXML();
+			OpenCurrentMenuCount = driver.findElements(By.xpath(MainMenu));
+			for(int i=0;i<OpenCurrentMenuCount.size();i++)
+			{				
+				String MenuName = OpenCurrentMenuCount.get(i).getText().trim();
+				System.out.println("MenuName:"+MenuName);
+				if(MenuName.equalsIgnoreCase(DatasheetFieldName))
+				{
+					if(Excel_Handling.Get_Data(ModuleName, "PermissionAccess").equalsIgnoreCase("Y"))
+					{
+						OpenCurrentMenuCount.get(i).click();
+						if(NavigationPageVerify()==true)
+						{	
+							test.NavigationWithTodaysDate("Pass");
+							break;
+						}else{
+							test.NavigationWithTodaysDate("Fail");
+							break;
+						}																
+					}else{
+						test.NavigationWithTodaysDate("You have Givena a Wrong Permission Access?");
+						break;
+					}
+				}
+				if(i==OpenCurrentMenuCount.size()-1)
+				{
+					if(Excel_Handling.Get_Data(ModuleName, "PermissionAccess").equalsIgnoreCase("N"))
+					{
+						Extent_Reporting.Log_Pass(ModuleName+" Menu does not exist for "+ sheetName +" Ids", "Passed");
+						test.NavigationWithTodaysDate("Pass");
+						break;
+					}else
+					{
+						test.NavigationWithTodaysDate("You have Givena a Wrong Permission Access?");
+						break;
+					}
+				}
+			}	
+		}catch(Exception t){
+			t.printStackTrace();
+			Extent_Reporting.Log_Fail("Amount didn't match", "Failed", driver);
+			throw new Exception("Submit buttondoes not exist");
 
+		}
+	}
+	public void ModuleName(String DatasheetFieldName, String ModuleNvigationXpath) throws Throwable {
+		try{	
+			Create_TestNGXML test = new Create_TestNGXML();
+			OpenCurrentMenuCount = driver.findElements(By.xpath(MainMenu));
+			for(int i=0;i<OpenCurrentMenuCount.size();i++)
+			{				
+				String MenuName = OpenCurrentMenuCount.get(i).getText().trim();
+				System.out.println("MenuName :"+MenuName);
+				if(MenuName.equalsIgnoreCase(DatasheetFieldName))
+				{
+					Assert.Javascriptexecutor_forClick(driver, ModuleNvigationXpath, DatasheetFieldName+" Menu is");
+					break;
+				}
+				if(i==OpenCurrentMenuCount.size()-1)
+				{
+					if(Excel_Handling.Get_Data(ModuleName, "PermissionAccess").trim().equalsIgnoreCase("N"))
+					{
+						test.NavigationWithTodaysDate("Pass");					
+					}else{
+						Extent_Reporting.Log_Fail(MenuName+" Menu Does not exist", "Fail", driver);
+						test.NavigationWithTodaysDate("Fail");					
+					}
+					Extent_Reporting.Log_Fail(DatasheetFieldName+" Menu Does not exist ", "Fail", driver);
+				}
+			}	
+		}catch(Exception t){
+			t.printStackTrace();
+			Extent_Reporting.Log_Fail("Amount didn't match", "Failed", driver);
+			throw new Exception("Submit buttondoes not exist");
+
+		}
+	}
+	
+	
+	public static List<String> stringList = null;
+	public static String[] stringArr = null;
+	public static String[] stringArrDrop = null;
+
+	public void AdvanceSearchListVal(String DatasheetFieldName) throws Throwable {
+		try{
+			stringList = new ArrayList<String>();
+			List<WebElement> list = driver.findElements(By.xpath(AdvanceSearchInputField));	
+			for(int i=0;i<list.size();i++)
+			{
+				stringList.add(list.get(i).getAttribute("placeholder").trim());
+				System.out.println(list.get(i).getAttribute("placeholder").trim());
+				stringArr = stringList.toArray( new String[] {});
+							
+			}		
+		}catch(Exception t){
+			t.printStackTrace();
+			Extent_Reporting.Log_Fail("Amount didn't match", "Failed", driver);
+			throw new Exception("Submit buttondoes not exist");
+
+		}
+	}
+	
+	public void AdvanceSearchDropBoxVal(String DatasheetFieldName) throws Throwable {
+		try{
+			stringList = new ArrayList<String>();
+			List<WebElement> list = driver.findElements(By.xpath(AdvanceSearchSelectField));		
+			for(int i=0;i<list.size();i++)
+			{
+				Select select1 =new Select(list.get(i));
+				String bankName =  select1.getFirstSelectedOption().getText();
+				System.out.println("bankName:"+bankName);
+				stringList.add(bankName.trim());
+				//System.out.println(list.get(i).getAttribute("placeholder").trim());
+				stringArrDrop = stringList.toArray( new String[] {});
+							
+			}		
+		}catch(Exception t){
+			t.printStackTrace();
+			Extent_Reporting.Log_Fail("Amount didn't match", "Failed", driver);
+			throw new Exception("Submit buttondoes not exist");
+
+		}
+	}
+	
+	
+	
+	
+	public void AdvanceSearchVerification() throws Exception{
+		try{
+			int i=0;
+			for(String fieldNameVerify:stringArr){				
+				System.out.println("value: " +fieldNameVerify);
+				i=i+1;
+				if(fieldNameVerify.equalsIgnoreCase(Excel_Handling.Get_Data(ModuleName, "Fields").trim()))
+				{
+					if(Excel_Handling.Get_Data(ModuleName, "PermissionAccess").trim().equalsIgnoreCase("Y"))
+					{
+						System.out.println("Pass");
+						test.NavigationWithTodaysDate("Pass");				
+						break;				
+					}else{
+						test.NavigationWithTodaysDate("Fail");
+						break;
+					}				
+				}
+				else
+				{	
+					System.out.println(stringArr.length);
+					if(stringArr.length==i)
+					{
+						if(Excel_Handling.Get_Data(ModuleName, "PermissionAccess").trim().equalsIgnoreCase("N"))
+						{
+							test.NavigationWithTodaysDate("Pass");					
+						}else{
+							test.NavigationWithTodaysDate("Fail");					
+
+						}
+					}				
+				}
+				
+			}
+		}catch(Exception t){
+			t.printStackTrace();
+			Extent_Reporting.Log_Fail("Amount didn't match", "Failed", driver);
+			throw new Exception("Submit buttondoes not exist");
+
+		}
+		
+		
+	}
+	
+	
+	public void AdvanceSearchDropbox() throws Exception{
+		try{
+			int i=0;
+			for(String fieldNameVerify:stringArrDrop){				
+				System.out.println("value: " +fieldNameVerify);
+				i=i+1;
+				if(fieldNameVerify.equalsIgnoreCase(Excel_Handling.Get_Data(ModuleName, "Fields").trim()))
+				{
+					if(Excel_Handling.Get_Data(ModuleName, "PermissionAccess").trim().equalsIgnoreCase("Y"))
+					{
+						System.out.println("Pass");
+						test.NavigationWithTodaysDate("Pass");				
+						break;				
+					}else{
+						test.NavigationWithTodaysDate("Fail");
+						break;
+					}				
+				}
+				else
+				{	
+					System.out.println(stringArr.length);
+					if(stringArrDrop.length==i)
+					{
+						if(Excel_Handling.Get_Data(ModuleName, "PermissionAccess").trim().equalsIgnoreCase("N"))
+						{
+							test.NavigationWithTodaysDate("Pass");	
+							break;
+						}
+					}				
+				}
+				
+			}
+		}catch(Exception t){
+			t.printStackTrace();
+			Extent_Reporting.Log_Fail("Amount didn't match", "Failed", driver);
+			throw new Exception("Submit buttondoes not exist");
+
+		}
+		
+		
+	}
+	
+	
+	
 
 }
