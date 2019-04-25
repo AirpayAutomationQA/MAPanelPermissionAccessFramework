@@ -1,7 +1,7 @@
 package com.Airpay.BusinessLogic;
 
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,9 +73,9 @@ public class AirPay_MA_Panel_Select_Merchant_BusinessLogic extends AirPay_Paymen
 			URLConcat = MA_ActualUrl.concat(Link);
 			driver.navigate().to(URLConcat);
 			Assert.waitForPageToLoad(driver);
-			Thread.sleep(15000);
+			Thread.sleep(7000);
 			MA_ActualUrl = driver.getCurrentUrl().trim();
-			System.out.println("Actual URL: "+URLConcat);
+			System.out.println("Actual URL: "+URLConcat);			
 			if(MA_ActualUrl.equalsIgnoreCase(URLConcat))
 			{
 				Extent_Reporting.Log_report_img("Menu redirected as expected", "Passed", driver);
@@ -323,7 +323,7 @@ public class AirPay_MA_Panel_Select_Merchant_BusinessLogic extends AirPay_Paymen
 	
 	public boolean URLDashboard() throws Throwable{
 		try{
-			FieldName = Excel_Handling.Get_Data(ModuleName, "Fields").trim();
+			//FieldName = Excel_Handling.Get_Data(ModuleName, "Fields").trim();
 			 if(Excel_Handling.Get_Data(ModuleName, "PermissionAccess").trim().equalsIgnoreCase("N"))
 			 { 
 				    MA_ActualUrl = Excel_Handling.Get_Data(ModuleName, "RootURL").trim();
@@ -344,6 +344,43 @@ public class AirPay_MA_Panel_Select_Merchant_BusinessLogic extends AirPay_Paymen
 						Extent_Reporting.Log_Fail("Passed URL is: "+URLConcat, "Actual URL is: "+MA_ActualUrl, driver);
 				       	test.URLWithTodaysDate("fail");		
 						return false;
+					}		  
+			 }else
+			 {				 
+					test.URLWithTodaysDate("I think, You have given the Wrong permission Access");
+			 }
+			}catch(Exception t){
+				t.printStackTrace();
+		       	test.NavigationWithTodaysDate("fail");		
+				throw new Exception("Serch filter does not exist");
+			}
+			return true;	
+		}
+	
+	
+	public boolean NavigationDashboard() throws Throwable{
+		try{
+			//FieldName = Excel_Handling.Get_Data(ModuleName, "Fields").trim();
+			 if(Excel_Handling.Get_Data(ModuleName, "PermissionAccess").trim().equalsIgnoreCase("N"))
+			 { 
+				    MA_ActualUrl = Excel_Handling.Get_Data(ModuleName, "RootURL").trim();
+					String Link = Excel_Handling.Get_Data(ModuleName, "Link").trim();
+					URLConcat = MA_ActualUrl.concat(Link);
+					driver.navigate().to(URLConcat);
+					Assert.waitForPageToLoad(driver);
+					Thread.sleep(5000);
+					MA_ActualUrl = driver.getCurrentUrl().trim();
+					System.out.println("Actual URL: "+URLConcat);
+					if(!MA_ActualUrl.equalsIgnoreCase(URLConcat))
+					{
+						Extent_Reporting.Log_report_img("URL are different", "As expected", driver);
+						System.out.println("Links didn't matched got matched as expected");	
+				       	test.NavigationWithTodaysDate("Pass");		
+
+					}else{
+						Extent_Reporting.Log_Fail("Passed URL is: "+URLConcat, "Actual URL is: "+MA_ActualUrl, driver);
+				       	test.NavigationWithTodaysDate("fail");		
+						
 					}		  
 			 }else
 			 {				 

@@ -24,7 +24,6 @@ public class TC_ID_004_Reports_TestCase_Test extends Driver_Setup{
 		Log.info("Setup the variable for Test");
 		webDriver = driver; 
 		tcID = ModuleName;
-		Log.info("Setup completed for the variable");
 	}
 	@Test(priority = 2)
 	public boolean TC_TestCaseName() throws Throwable 
@@ -47,12 +46,17 @@ public class TC_ID_004_Reports_TestCase_Test extends Driver_Setup{
 			if(Excel_Handling.Get_Data(ModuleName, "ProceedWithNavigation").trim().equalsIgnoreCase("Y"))
 			{
 				MA_panel.ModuleName(Excel_Handling.Get_Data(ModuleName, "Menu").trim(), "(//*[text()='"+Excel_Handling.Get_Data(ModuleName, "Menu").trim()+"'])[1]//preceding::a[@class='mm-next'][1]");
-				MA_panel.ModuleName(Excel_Handling.Get_Data(ModuleName, "Sub Menu").trim(), "//*[text()='"+Excel_Handling.Get_Data(ModuleName, "Sub Menu").trim()+"']");		
-				if(MA_panel.VerifyPageThroughLink()==true)
-				{
-					test.URLWithTodaysDate("Pass");
+				MA_panel.ModuleName(Excel_Handling.Get_Data(ModuleName, "Sub Menu").trim(), "//*[text()='"+Excel_Handling.Get_Data(ModuleName, "Sub Menu").trim()+"']");					
+				if(Excel_Handling.Get_Data(ModuleName, "PermissionAccess").trim().equalsIgnoreCase("Y"))
+				{	
+					if(MA_panel.VerifyPageThroughLink()==true)
+					{
+						test.NavigationWithTodaysDate("Pass");
+					}else{
+						test.NavigationWithTodaysDate("Fail");
+					}					
 				}else{
-					test.URLWithTodaysDate("Fail");
+					MA_panel.NavigationDashboard();
 				}	
 			}else{
 				test.NavigationWithTodaysDate("I think,You are not running the test through Navigation Mode.");
@@ -82,7 +86,14 @@ public class TC_ID_004_Reports_TestCase_Test extends Driver_Setup{
 		}
 		return true;
 	}
-	
+	@Test(priority = 3)
+	public void PermissionResult() throws Throwable{
+		if(TC_TestCaseName()==true){
+			System.out.println("Pass");
+		}else{
+			System.out.println("fail");
+		}
+	}
 	@AfterTest
 	public void tearDown()
 	{
