@@ -2,14 +2,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Airpay]">
   <parameter name="appURL" value="http://localhost/airpay_php/transaction.html"/>
-  <parameter name="tcID" value="Transaction Funnel_Admin"/>
+  <parameter name="tcID" value="Subscription Management "/>
   <parameter name="browserType" value="CHROME"/>
-  <test name="Transaction Funnel_Admin">
+  <test name="Subscription Management ">
     <parameter name="appURL" value="http://localhost/airpay_php/transaction.html"/>
-    <parameter name="tcID" value="Transaction Funnel_Admin"/>
+    <parameter name="tcID" value="Subscription Management "/>
     <parameter name="browserType" value="CHROME"/>
     <classes>
       <class name="com.Airpay.Tests.TC_ID_004_Reports_TestCase_Test"/>
     </classes>
-  </test> <!-- Transaction Funnel_Admin -->
+  </test> <!-- Subscription Management  -->
 </suite> <!-- Failed suite [Airpay] -->

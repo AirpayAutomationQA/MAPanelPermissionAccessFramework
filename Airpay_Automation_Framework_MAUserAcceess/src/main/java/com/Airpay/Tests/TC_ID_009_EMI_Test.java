@@ -47,6 +47,7 @@ public class TC_ID_009_EMI_Test extends Driver_Setup{
 			if(Excel_Handling.Get_Data(ModuleName, "ProceedWithNavigation").trim().equalsIgnoreCase("Y"))
 			{
 				MA_panel.ModuleName(Excel_Handling.Get_Data(ModuleName, "Menu").trim(), "(//*[text()='"+Excel_Handling.Get_Data(ModuleName, "Menu").trim()+"'])[1]//preceding::a[@class='mm-next'][1]");				
+				System.out.println("");
 				MA_panel.ModuleName(Excel_Handling.Get_Data(ModuleName, "Sub Menu").trim(), "//*[text()='"+Excel_Handling.Get_Data(ModuleName, "Sub Menu").trim()+"'])[1]//preceding::a[@class='mm-next'][1]");		
 				MA_panel.ModuleName(Excel_Handling.Get_Data(ModuleName, "Fields").trim(), "//*[text()='"+Excel_Handling.Get_Data(ModuleName, "Fields").trim()+"']");		
 				if(MA_panel.VerifyPageThroughLink()==true)

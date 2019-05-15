@@ -67,7 +67,6 @@ public class Driver_Setup {
 		return driver;
 	}
 
-
 	public WebDriver initIEDriver(String appURL) {
 		System.out.println("Launching google IE driver!!! .");
 		System.setProperty("webdriver.ie.driver", driverPath

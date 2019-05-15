@@ -1725,7 +1725,7 @@ public class AirPay_MA_Panel_Select_Merchant_BusinessLogic extends AirPay_Paymen
 			for(int i=0;i<OpenCurrentMenuCount.size();i++)
 			{				
 				String MenuName = OpenCurrentMenuCount.get(i).getText().trim();
-				System.out.println("MenuName :"+MenuName);
+				System.out.println("MenuName:"+MenuName);
 				if(MenuName.equalsIgnoreCase(DatasheetFieldName))
 				{
 					Assert.Javascriptexecutor_forClick(driver, ModuleNvigationXpath, DatasheetFieldName+" Menu is");
