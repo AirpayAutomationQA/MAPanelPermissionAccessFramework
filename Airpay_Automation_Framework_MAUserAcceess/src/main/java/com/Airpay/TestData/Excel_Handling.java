@@ -475,9 +475,7 @@ public class Excel_Handling {
 		sheet = workbook.getSheet(sheetName);
 		int flagIndex,keyIndex;
 		flagIndex=findColumnIndex(Flag);
-		keyIndex=findColumnIndex(Key);
-		
-		
+		keyIndex=findColumnIndex(Key);		
 		int lastRow = sheet.getLastRowNum();
 		System.out.println(lastRow);
 		
@@ -493,8 +491,11 @@ public class Excel_Handling {
 					{
 						
 						sheet.getRow(0).getCell(j).setCellType(Cell.CELL_TYPE_STRING);
+						System.out.println(sheet.getRow(0).getCell(j));
 						sheet.getRow(i).getCell(j).setCellType(Cell.CELL_TYPE_STRING);
-					testdata.put(sheet.getRow(0).getCell(j).getStringCellValue(),sheet.getRow(i).getCell(j).getStringCellValue() );
+						System.out.println(sheet.getRow(i).getCell(j));
+
+						testdata.put(sheet.getRow(0).getCell(j).getStringCellValue(),sheet.getRow(i).getCell(j).getStringCellValue() );
 				 System.out.println(sheet.getRow(0).getCell(j).getStringCellValue()+" " +sheet.getRow(i).getCell(j).getStringCellValue());
 					}
 					catch(Throwable e)

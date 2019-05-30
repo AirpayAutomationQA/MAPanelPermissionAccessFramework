@@ -1,17 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="1" passed="1">
+<testng-results skipped="0" failed="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Main Test Suite" duration-ms="397590" started-at="2019-05-03T06:23:39Z" finished-at="2019-05-03T06:30:16Z">
+  <suite name="Airpay" duration-ms="976814" started-at="2019-05-23T09:11:04Z" finished-at="2019-05-23T09:27:21Z">
     <groups>
     </groups>
-    <test name="TestNG Test Group1" duration-ms="397590" started-at="2019-05-03T06:23:39Z" finished-at="2019-05-03T06:30:16Z">
-      <class name="com.Airpay.Utilities.Create_TestNGXML">
-        <test-method status="PASS" signature="createXMLfile()[pri:0, instance:com.Airpay.Utilities.Create_TestNGXML@5442a311]" name="createXMLfile" duration-ms="397575" started-at="2019-05-03T11:53:39Z" finished-at="2019-05-03T12:00:16Z">
+    <test name="Bulk upload UPI" duration-ms="976814" started-at="2019-05-23T09:11:04Z" finished-at="2019-05-23T09:27:21Z">
+      <class name="com.Airpay.Tests.TC_ID_004_Reports_TestCase_Test">
+        <test-method status="PASS" signature="initializeTestBaseSetup(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.Airpay.Tests.TC_ID_004_Reports_TestCase_Test@3051e0b2]" name="initializeTestBaseSetup" is-config="true" duration-ms="10325" started-at="2019-05-23T14:41:04Z" finished-at="2019-05-23T14:41:15Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[CHROME]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[http://localhost/airpay_php/transaction.html]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Bulk upload UPI]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- createXMLfile -->
-      </class> <!-- com.Airpay.Utilities.Create_TestNGXML -->
-    </test> <!-- TestNG Test Group1 -->
-  </suite> <!-- Main Test Suite -->
+        </test-method> <!-- initializeTestBaseSetup -->
+        <test-method status="PASS" signature="setup()[pri:1, instance:com.Airpay.Tests.TC_ID_004_Reports_TestCase_Test@3051e0b2]" name="setup" duration-ms="3" started-at="2019-05-23T14:41:15Z" finished-at="2019-05-23T14:41:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="PermissionResult()[pri:3, instance:com.Airpay.Tests.TC_ID_004_Reports_TestCase_Test@3051e0b2]" name="PermissionResult" duration-ms="966307" started-at="2019-05-23T14:41:15Z" finished-at="2019-05-23T14:57:21Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- PermissionResult -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.Airpay.Tests.TC_ID_004_Reports_TestCase_Test@3051e0b2]" name="tearDown" is-config="true" duration-ms="177" started-at="2019-05-23T14:57:21Z" finished-at="2019-05-23T14:57:21Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.Airpay.Tests.TC_ID_004_Reports_TestCase_Test -->
+    </test> <!-- Bulk upload UPI -->
+  </suite> <!-- Airpay -->
 </testng-results>

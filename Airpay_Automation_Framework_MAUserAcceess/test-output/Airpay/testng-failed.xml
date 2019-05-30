@@ -2,14 +2,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Airpay]">
   <parameter name="appURL" value="http://localhost/airpay_php/transaction.html"/>
-  <parameter name="tcID" value="Subscription Management "/>
+  <parameter name="tcID" value="Bulk upload UPI"/>
   <parameter name="browserType" value="CHROME"/>
-  <test name="Subscription Management ">
+  <test name="Bulk upload UPI">
     <parameter name="appURL" value="http://localhost/airpay_php/transaction.html"/>
-    <parameter name="tcID" value="Subscription Management "/>
+    <parameter name="tcID" value="Bulk upload UPI"/>
     <parameter name="browserType" value="CHROME"/>
     <classes>
       <class name="com.Airpay.Tests.TC_ID_004_Reports_TestCase_Test"/>
     </classes>
-  </test> <!-- Subscription Management  -->
+  </test> <!-- Bulk upload UPI -->
 </suite> <!-- Failed suite [Airpay] -->

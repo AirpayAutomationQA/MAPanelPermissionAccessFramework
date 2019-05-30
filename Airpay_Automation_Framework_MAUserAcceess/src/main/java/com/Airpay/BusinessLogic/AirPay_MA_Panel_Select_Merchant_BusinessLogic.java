@@ -27,7 +27,7 @@ public class AirPay_MA_Panel_Select_Merchant_BusinessLogic extends AirPay_Paymen
 	public static String MA_URL = null;
 	public static String FieldName = null;
 
-	Create_TestNGXML test = new 	Create_TestNGXML();
+	Create_TestNGXML test = new Create_TestNGXML();
 	ElementAction Assert = new ElementAction();
 	public AirPay_MA_Panel_Select_Merchant_BusinessLogic(WebDriver driver, String ModuleName)
 	{
@@ -73,7 +73,7 @@ public class AirPay_MA_Panel_Select_Merchant_BusinessLogic extends AirPay_Paymen
 			URLConcat = MA_ActualUrl.concat(Link);
 			driver.navigate().to(URLConcat);
 			Assert.waitForPageToLoad(driver);
-			Thread.sleep(7000);
+			Thread.sleep(15000);
 			MA_ActualUrl = driver.getCurrentUrl().trim();
 			System.out.println("Actual URL: "+URLConcat);			
 			if(MA_ActualUrl.equalsIgnoreCase(URLConcat))
@@ -151,10 +151,10 @@ public class AirPay_MA_Panel_Select_Merchant_BusinessLogic extends AirPay_Paymen
 			{
 				Assert.inputText(driver, AirPay_Payment_MA_Panel_PageObject.MM_Merchant_Search, Excel_Handling.Get_Data(ModuleName, "Merchant_ID").trim(), "Merchant ID");
 				Assert.clickButton(driver, AirPay_Payment_MA_Panel_PageObject.MM_Merchant_Search, "Search Entered");
-				Thread.sleep(10000);
+				Thread.sleep(5000);
 				Extent_Reporting.Log_report_img("Merchant ID Entered", "Passed", driver);
 				Assert.Javascriptexecutor_forClick(driver, AirPay_Payment_MA_Panel_PageObject.MM_Merchant_Search, "Merchant ID ");
-				Thread.sleep(10000);
+				Thread.sleep(5000);
 				Assert.waitForPageToLoad(driver);
 				Assert.WaitUntilExist(driver, AirPay_Payment_MA_Panel_PageObject.MM_Merchant_Select);	
 			}else{
@@ -174,7 +174,7 @@ public class AirPay_MA_Panel_Select_Merchant_BusinessLogic extends AirPay_Paymen
 				MerchantName=driver.findElement(By.xpath(AirPay_Payment_MA_Panel_PageObject.MM_Merchant_IDName)).getText().trim();
 				Assert.Clickbtn(driver, AirPay_Payment_MA_Panel_PageObject.MM_Merchant_SelectBtn+"["+1+"]", "Select Merchant");
 				Assert.waitForPageToLoad(driver);
-				Thread.sleep(20000);
+				Thread.sleep(15000);
 				String SelectedMerchant = driver.findElement(By.xpath(AirPay_Payment_MA_Panel_PageObject.MM_SelectMerchantSymbol)).getText().trim();
 				if(MerchantName.equalsIgnoreCase(SelectedMerchant))
 				{				
@@ -201,7 +201,14 @@ public class AirPay_MA_Panel_Select_Merchant_BusinessLogic extends AirPay_Paymen
 			String FieldName = "";
 			Assert.waitForPageToLoad(driver);
 			if(Assert.isElementDisplayed(driver, MenuOption,  "Main Menu"))
-			{		
+			{					
+				if(Excel_Handling.Get_Data(ModuleName, "NeedToSelectMerchant").trim().equalsIgnoreCase("Y"))
+				{				
+				  AirPay_MA_Panel_Select_Merchant_BusinessLogic bus = new AirPay_MA_Panel_Select_Merchant_BusinessLogic(driver, ModuleName);					
+				  bus.Select_Merchant();	
+				  bus.Filter_Merchant();
+				  bus.Choose_Merchant();	
+				}
 				FieldName = driver.findElement(By.xpath(MenuOption)).getText().trim();
 				System.out.println("FieldName:"+FieldName );
 				Assert.Javascriptexecutor_forClick(driver, MenuOption, FieldName+" Respective Menu");
@@ -331,7 +338,7 @@ public class AirPay_MA_Panel_Select_Merchant_BusinessLogic extends AirPay_Paymen
 					URLConcat = MA_ActualUrl.concat(Link);
 					driver.navigate().to(URLConcat);
 					Assert.waitForPageToLoad(driver);
-					Thread.sleep(5000);
+					Thread.sleep(15000);
 					MA_ActualUrl = driver.getCurrentUrl().trim();
 					System.out.println("Actual URL: "+URLConcat);
 					if(!MA_ActualUrl.equalsIgnoreCase(URLConcat))
@@ -1718,7 +1725,7 @@ public class AirPay_MA_Panel_Select_Merchant_BusinessLogic extends AirPay_Paymen
 
 		}
 	}
-	public void ModuleName(String DatasheetFieldName, String ModuleNvigationXpath) throws Throwable {
+	public boolean ModuleName(String DatasheetFieldName, String ModuleNvigationXpath) throws Throwable {
 		try{	
 			Create_TestNGXML test = new Create_TestNGXML();
 			OpenCurrentMenuCount = driver.findElements(By.xpath(MainMenu));
@@ -1735,12 +1742,14 @@ public class AirPay_MA_Panel_Select_Merchant_BusinessLogic extends AirPay_Paymen
 				{
 					if(Excel_Handling.Get_Data(ModuleName, "PermissionAccess").trim().equalsIgnoreCase("N"))
 					{
-						test.NavigationWithTodaysDate("Pass");					
+						test.NavigationWithTodaysDate("Pass");	
+						return true;
 					}else{
 						Extent_Reporting.Log_Fail(MenuName+" Menu Does not exist", "Fail", driver);
-						test.NavigationWithTodaysDate("Fail");					
+						test.NavigationWithTodaysDate("Fail");
+						return false;
+
 					}
-					Extent_Reporting.Log_Fail(DatasheetFieldName+" Menu Does not exist ", "Fail", driver);
 				}
 			}	
 		}catch(Exception t){
@@ -1749,6 +1758,7 @@ public class AirPay_MA_Panel_Select_Merchant_BusinessLogic extends AirPay_Paymen
 			throw new Exception("Submit buttondoes not exist");
 
 		}
+		return true;
 	}
 	
 	

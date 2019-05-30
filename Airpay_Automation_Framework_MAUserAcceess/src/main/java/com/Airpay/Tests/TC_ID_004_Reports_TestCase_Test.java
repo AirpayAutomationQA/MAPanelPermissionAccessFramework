@@ -46,18 +46,19 @@ public class TC_ID_004_Reports_TestCase_Test extends Driver_Setup{
 			if(Excel_Handling.Get_Data(ModuleName, "ProceedWithNavigation").trim().equalsIgnoreCase("Y"))
 			{
 				MA_panel.ModuleName(Excel_Handling.Get_Data(ModuleName, "Menu").trim(), "(//*[text()='"+Excel_Handling.Get_Data(ModuleName, "Menu").trim()+"'])[1]//preceding::a[@class='mm-next'][1]");
-				MA_panel.ModuleName(Excel_Handling.Get_Data(ModuleName, "Sub Menu").trim(), "//*[text()='"+Excel_Handling.Get_Data(ModuleName, "Sub Menu").trim()+"']");					
+			    boolean flag =	MA_panel.ModuleName(Excel_Handling.Get_Data(ModuleName, "Sub Menu").trim(), "//*[text()='"+Excel_Handling.Get_Data(ModuleName, "Sub Menu").trim()+"']");					
 				if(Excel_Handling.Get_Data(ModuleName, "PermissionAccess").trim().equalsIgnoreCase("Y"))
 				{	
-					if(MA_panel.VerifyPageThroughLink()==true)
+					if(flag==true)
 					{
 						test.NavigationWithTodaysDate("Pass");
-					}else{
-						test.NavigationWithTodaysDate("Fail");
-					}					
-				}else{
-					MA_panel.NavigationDashboard();
-				}	
+					}//else{
+						//test.NavigationWithTodaysDate("Fail");
+					//}					
+				}//else
+				//{
+					//MA_panel.NavigationDashboard();
+				//}	
 			}else{
 				test.NavigationWithTodaysDate("I think,You are not running the test through Navigation Mode.");
 			}
